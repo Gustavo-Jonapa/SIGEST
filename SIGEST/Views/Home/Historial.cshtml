@@ -1,0 +1,412 @@
+@{
+    ViewBag.Title = "Historial - SIGEST";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="fw-bold mb-1">Historial de Servicios</h2>
+            <p class="text-muted">Administra y revisa todos tus servicios contratados</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <!-- Total Services -->
+        <div class="col-6 col-md-3">
+            <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Total de servicios</p>
+                            <h2 class="fw-bold mb-0">2</h2>
+                        </div>
+                        <div class="stat-icon bg-primary-soft">
+                            <i class="bi bi-calendar-check text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed -->
+        <div class="col-6 col-md-3">
+            <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Completados</p>
+                            <h2 class="fw-bold mb-0 text-success">1</h2>
+                        </div>
+                        <div class="stat-icon bg-success-soft">
+                            <i class="bi bi-check-circle text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scheduled -->
+        <div class="col-6 col-md-3">
+            <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Programados</p>
+                            <h2 class="fw-bold mb-0 text-info">1</h2>
+                        </div>
+                        <div class="stat-icon bg-info-soft">
+                            <i class="bi bi-clock text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Spent -->
+        <div class="col-6 col-md-3">
+            <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Total gastado</p>
+                            <h2 class="fw-bold mb-0">$0</h2>
+                        </div>
+                        <div class="stat-icon bg-warning-soft">
+                            <i class="bi bi-piggy-bank text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-3">
+                    <ul class="nav nav-pills nav-fill gap-2" id="servicesTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill" id="todos-tab" data-bs-toggle="pill" 
+                                    data-bs-target="#todos" type="button" role="tab">
+                                Todos (2)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" id="completados-tab" data-bs-toggle="pill" 
+                                    data-bs-target="#completados" type="button" role="tab">
+                                Completados (1)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" id="programados-tab" data-bs-toggle="pill" 
+                                    data-bs-target="#programados" type="button" role="tab">
+                                Programados (1)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" id="progreso-tab" data-bs-toggle="pill" 
+                                    data-bs-target="#progreso" type="button" role="tab">
+                                En progreso (1)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" id="cancelados-tab" data-bs-toggle="pill" 
+                                    data-bs-target="#cancelados" type="button" role="tab">
+                                Cancelados (0)
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services List -->
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-content" id="servicesTabContent">
+                <!-- Todos Tab -->
+                <div class="tab-pane fade show active" id="todos" role="tabpanel">
+                    <!-- Service Item 1 -->
+                    <div class="card service-card border-0 shadow-sm mb-3">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="service-avatar bg-primary-soft text-primary">
+                                        A
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <h5 class="mb-1 fw-bold">Servicio contratado</h5>
+                                            <p class="text-muted mb-0 small">
+                                                <span class="fw-semibold">Técnico</span> • Profesión
+                                            </p>
+                                        </div>
+                                        <span class="badge bg-success px-3 py-2 rounded-pill">Estado</span>
+                                    </div>
+                                    
+                                    <p class="text-muted small mb-3">
+                                        Descripción del cliente
+                                    </p>
+                                    
+                                    <div class="d-flex flex-wrap gap-3 mb-3">
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-calendar3 me-2"></i>
+                                            fecha
+                                        </div>
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-clock me-2"></i>
+                                            horario • 0h
+                                        </div>
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-geo-alt me-2"></i>
+                                            ubicación
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <div class="rating mb-2">
+                                                <span class="text-muted small me-2">Tu calificación:</span>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span class="badge bg-success-soft text-success">
+                                                    <i class="bi bi-check-circle me-1"></i>Pagado
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h4 class="mb-0 fw-bold">$0</h4>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-light rounded-circle" type="button" 
+                                                data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ver detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Descargar recibo</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-chat-dots me-2"></i>Contactar profesional</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Item 2 - Scheduled -->
+                    <div class="card service-card border-0 shadow-sm mb-3">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="service-avatar bg-info-soft text-info">
+                                        B
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div>
+                                            <h5 class="mb-1 fw-bold">Servicio contratado</h5>
+                                            <p class="text-muted mb-0 small">
+                                                <span class="fw-semibold">Técnico</span> • Profesión
+                                            </p>
+                                        </div>
+                                        <span class="badge bg-info px-3 py-2 rounded-pill">Estado</span>
+                                    </div>
+                                    
+                                    <p class="text-muted small mb-3">
+                                        Descripción del cliente
+                                    </p>
+                                    
+                                    <div class="d-flex flex-wrap gap-3 mb-3">
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-calendar3 me-2"></i>
+                                            fecha
+                                        </div>
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-clock me-2"></i>
+                                            horario • 0h
+                                        </div>
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-geo-alt me-2"></i>
+                                            ubicación
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                                                <i class="bi bi-x-circle me-1"></i>Cancelar
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                                                <i class="bi bi-pencil me-1"></i>Reagendar
+                                            </button>
+                                        </div>
+                                        <h4 class="mb-0 fw-bold">$0</h4>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-light rounded-circle" type="button" 
+                                                data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ver detalles</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-chat-dots me-2"></i>Contactar profesional</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional service items would go here -->
+                    <div class="alert alert-light border-0 text-center py-4">
+                        <i class="bi bi-inbox fs-1 text-muted d-block mb-2"></i>
+                        <p class="text-muted mb-0">Mostrando 2 de 6 servicios</p>
+                        <button class="btn btn-outline-secondary btn-sm mt-2 rounded-pill px-4">
+                            Ver todos los servicios
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Other tabs content (Completados, Programados, etc.) -->
+                <div class="tab-pane fade" id="completados" role="tabpanel">
+                    <div class="alert alert-info border-0 text-center py-5">
+                        <i class="bi bi-check-circle fs-1 d-block mb-3"></i>
+                        <h5>Servicios Completados</h5>
+                        <p class="text-muted">Aquí aparecerán solo los servicios completados (4 servicios)</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="programados" role="tabpanel">
+                    <div class="alert alert-warning border-0 text-center py-5">
+                        <i class="bi bi-clock fs-1 d-block mb-3"></i>
+                        <h5>Servicios Programados</h5>
+                        <p class="text-muted">Tienes 1 servicio programado próximamente</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="progreso" role="tabpanel">
+                    <div class="alert alert-secondary border-0 text-center py-5">
+                        <i class="bi bi-hourglass-split fs-1 d-block mb-3"></i>
+                        <h5>No hay servicios en progreso</h5>
+                        <p class="text-muted">Los servicios que estén actualmente ejecutándose aparecerán aquí</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="cancelados" role="tabpanel">
+                    <div class="alert alert-danger border-0 text-center py-5">
+                        <i class="bi bi-x-circle fs-1 d-block mb-3"></i>
+                        <h5>Servicios Cancelados</h5>
+                        <p class="text-muted">Tienes 1 servicio cancelado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .stat-card {
+        transition: transform 0.3s ease;
+        border-radius: 12px;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .bg-primary-soft {
+        background-color: #cfe2ff;
+    }
+
+    .bg-success-soft {
+        background-color: #d1f2eb;
+    }
+
+    .bg-info-soft {
+        background-color: #cff4fc;
+    }
+
+    .bg-warning-soft {
+        background-color: #fff3cd;
+    }
+
+    .nav-pills .nav-link {
+        color: #6c757d;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #212529;
+    }
+
+    .service-card {
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .service-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .rating i {
+        font-size: 0.875rem;
+    }
+
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Tab switching animation
+            $('button[data-bs-toggle="pill"]').on('shown.bs.tab', function (e) {
+                $(e.target.getAttribute('data-bs-target')).hide().fadeIn(300);
+            });
+
+            // Service actions
+            $('.service-card .dropdown-item').click(function(e) {
+                e.preventDefault();
+                var action = $(this).text().trim();
+                console.log('Acción seleccionada:', action);
+            });
+        });
+    </script>
+}

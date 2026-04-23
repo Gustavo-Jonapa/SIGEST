@@ -1,0 +1,446 @@
+@{
+    ViewBag.Title = "Mi Perfil - SIGEST";
+    Layout = "~/Views/Shared/_LayoutTecnico.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <div class="row g-4">
+        <!-- Left Column - Profile Info -->
+        <div class="col-lg-6">
+            <!-- Basic Information Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0">Información Básica</h5>
+                        <button class="btn btn-outline-primary btn-sm rounded-pill px-3" id="editBasicInfo">
+                            <i class="bi bi-pencil me-2"></i>Editar
+                        </button>
+                    </div>
+                    <p class="text-muted small mb-4">Tu información personal y de contacto</p>
+
+                    <!-- Profile Header -->
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block">
+                            <div class="profile-avatar-large mx-auto bg-light d-flex align-items-center justify-content-center">
+                                <i class="bi bi-person text-muted" style="font-size: 5rem;"></i>
+                            </div>
+                            <button class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 shadow-sm" 
+                                    style="width: 44px; height: 44px;">
+                                <i class="bi bi-camera-fill"></i>
+                            </button>
+                        </div>
+                        <h4 class="fw-bold mt-3 mb-1">Sergio Cs</h4>
+                        <p class="text-muted mb-2">Plomería</p>
+                        <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <span class="fw-bold">4.8</span>
+                            <span class="text-muted small">(124 reseñas)</span>
+                        </div>
+                    </div>
+
+                    <!-- Basic Info Form -->
+                    <form id="basicInfoForm">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Nombre completo</label>
+                                <input type="text" class="form-control" value="Sergio Cs" disabled>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Categoría principal</label>
+                                <select class="form-select" disabled>
+                                    <option selected>Plomería</option>
+                                    <option>Carpintería</option>
+                                    <option>Electricidad</option>
+                                    <option>Cerrajería</option>
+                                    <option>Pintura</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Teléfono</label>
+                                <input type="tel" class="form-control" value="+52 961 123 4567" disabled>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Correo electrónico</label>
+                                <input type="email" class="form-control" value="sergio@example.com" disabled>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Ciudad</label>
+                                <input type="text" class="form-control" value="Tuxtla Gutiérrez, Chiapas" disabled>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Dirección / Colonia</label>
+                                <input type="text" class="form-control" value="Col. Centro" disabled>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Años de experiencia</label>
+                                <input type="number" class="form-control" value="15" disabled>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tarifa por hora (MXN)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" value="250" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Descripción profesional</label>
+                                <textarea class="form-control" rows="4" disabled>Plomero certificado con 15 años de experiencia en instalaciones residenciales y comerciales. Especializado en reparaciones de urgencia y mantenimiento preventivo.</textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-none mt-4" id="basicInfoActions">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="bi bi-check-circle me-2"></i>Guardar cambios
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" id="cancelBasicInfo">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Performance & Settings -->
+        <div class="col-lg-6">
+            <!-- Performance Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Rendimiento</h5>
+
+                    <!-- Rating -->
+                    <div class="performance-item mb-4 pb-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="performance-icon bg-warning-soft">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Calificación</h6>
+                                    <p class="text-muted small mb-0">Promedio de tus reseñas</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="text-end">
+                                    <h4 class="fw-bold mb-0">4.8/5.0</h4>
+                                </div>
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completed Jobs -->
+                    <div class="performance-item mb-4 pb-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="performance-icon bg-primary-soft">
+                                    <i class="bi bi-briefcase-fill text-primary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Trabajos completados</h6>
+                                    <p class="text-muted small mb-0">Total de servicios finalizados</p>
+                                </div>
+                            </div>
+                            <h4 class="fw-bold mb-0">342</h4>
+                        </div>
+                    </div>
+
+                    <!-- Total Reviews -->
+                    <div class="performance-item mb-4 pb-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="performance-icon bg-info-soft">
+                                    <i class="bi bi-chat-heart-fill text-info"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Total reseñas</h6>
+                                    <p class="text-muted small mb-0">Comentarios de clientes</p>
+                                </div>
+                            </div>
+                            <h4 class="fw-bold mb-0">124</h4>
+                        </div>
+                    </div>
+
+                    <!-- Response Time -->
+                    <div class="performance-item">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="performance-icon bg-success-soft">
+                                    <i class="bi bi-clock-fill text-success"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Tiempo de respuesta</h6>
+                                    <p class="text-muted small mb-0">Promedio de respuesta a solicitudes</p>
+                                </div>
+                            </div>
+                            <h4 class="fw-bold mb-0">15 min</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Completion Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">Completitud del perfil</h5>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted small">Progreso</span>
+                            <span class="fw-bold text-success">95%</span>
+                        </div>
+                        <div class="progress" style="height: 12px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 95%"></div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success-soft border-0 mb-0">
+                        <div class="d-flex align-items-start gap-2">
+                            <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                            <div>
+                                <p class="mb-1 small fw-semibold">¡Casi listo!</p>
+                                <p class="mb-0 small text-muted">
+                                    Agrega más especialidades para mejorar tu perfil.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Card -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Configuración</h5>
+
+                    <div class="settings-list">
+                        <div class="setting-item d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">Disponibilidad</h6>
+                                <p class="text-muted small mb-0">Acepta nuevas solicitudes</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+
+                        <div class="setting-item d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">Notificaciones push</h6>
+                                <p class="text-muted small mb-0">Recibe alertas de nuevas solicitudes</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+
+                        <div class="setting-item d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">Notificaciones por correo</h6>
+                                <p class="text-muted small mb-0">Resumen diario de actividad</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+
+                        <div class="setting-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Modo vacaciones</h6>
+                                <p class="text-muted small mb-0">Pausa todas las solicitudes</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary rounded-pill">
+                            <i class="bi bi-key me-2"></i>Cambiar contraseña
+                        </button>
+                        <button class="btn btn-outline-danger rounded-pill">
+                            <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-avatar-large {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid #f8f9fa;
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+    }
+
+    .card {
+        border-radius: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+
+    .form-control:disabled,
+    .form-select:disabled {
+        background-color: #f8f9fa;
+        border-color: #e9ecef;
+        cursor: not-allowed;
+    }
+
+    .form-control:not(:disabled),
+    .form-select:not(:disabled) {
+        border-color: #0d6efd;
+        border-width: 2px;
+    }
+
+    .performance-item {
+        transition: all 0.3s ease;
+    }
+
+    .performance-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+    }
+
+    .bg-primary-soft {
+        background-color: #cfe2ff;
+    }
+
+    .bg-success-soft {
+        background-color: #d1f2eb;
+    }
+
+    .bg-warning-soft {
+        background-color: #fff3cd;
+    }
+
+    .bg-info-soft {
+        background-color: #cff4fc;
+    }
+
+    .alert-success-soft {
+        background-color: #d1f2eb;
+        color: #0f5132;
+    }
+
+    .progress {
+        border-radius: 10px;
+        background-color: #e9ecef;
+    }
+
+    .progress-bar {
+        border-radius: 10px;
+        transition: width 0.6s ease;
+    }
+
+    .form-switch .form-check-input {
+        width: 3.5rem;
+        height: 1.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .form-switch .form-check-input:checked {
+        background-color: #198754;
+        border-color: #198754;
+    }
+
+    .form-switch .form-check-input:not(:checked) {
+        background-color: #dee2e6;
+    }
+
+    .setting-item:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .show {
+        animation: slideDown 0.3s ease;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Edit Basic Info
+            $('#editBasicInfo').click(function() {
+                $('#basicInfoForm input, #basicInfoForm select, #basicInfoForm textarea').prop('disabled', false);
+                $('#basicInfoActions').removeClass('d-none').addClass('show');
+                $(this).addClass('d-none');
+            });
+
+            $('#cancelBasicInfo').click(function() {
+                $('#basicInfoForm input, #basicInfoForm select, #basicInfoForm textarea').prop('disabled', true);
+                $('#basicInfoActions').addClass('d-none').removeClass('show');
+                $('#editBasicInfo').removeClass('d-none');
+            });
+
+            $('#basicInfoForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Aquí iría la lógica para guardar los cambios
+                alert('Cambios guardados exitosamente');
+                
+                $('#basicInfoForm input, #basicInfoForm select, #basicInfoForm textarea').prop('disabled', true);
+                $('#basicInfoActions').addClass('d-none').removeClass('show');
+                $('#editBasicInfo').removeClass('d-none');
+            });
+
+            // Settings switches
+            $('.form-check-input').change(function() {
+                var setting = $(this).closest('.setting-item').find('h6').text();
+                var status = $(this).is(':checked') ? 'activada' : 'desactivada';
+                console.log('Configuración "' + setting + '" ' + status);
+                
+                // Muestra notificación visual
+                showNotification(setting + ' ' + status);
+            });
+
+            // Helper function for notifications
+            function showNotification(message) {
+                var notification = $('<div class="alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">' + 
+                    '<i class="bi bi-check-circle me-2"></i>' + message + 
+                    '</div>');
+                
+                $('body').append(notification);
+                
+                setTimeout(function() {
+                    notification.fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+
+            // Progress bar animation on load
+            $('.progress-bar').css('width', '0%');
+            setTimeout(function() {
+                $('.progress-bar').css('width', '95%');
+            }, 300);
+        });
+    </script>
+}

@@ -1,0 +1,328 @@
+@{
+    ViewBag.Title = "Inicio - SIGEST";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <!-- Search Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="search-wrapper">
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0 ps-0" 
+                           placeholder="Buscar por nombre, categoría o ubicación..." 
+                           id="searchInput">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="category-pills d-flex flex-wrap gap-2">
+                <button class="btn btn-dark rounded-pill px-4 active" data-category="todos">
+                    <i class="bi bi-grid-3x3-gap me-2"></i>Todos
+                    <span class="badge bg-white text-dark ms-2">8</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="plomeria">
+                    <i class="bi bi-droplet me-2"></i>Plomería
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="carpinteria">
+                    <i class="bi bi-hammer me-2"></i>Carpintería
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="cerrajeria">
+                    <i class="bi bi-key me-2"></i>Cerrajería
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="electricidad">
+                    <i class="bi bi-lightning me-2"></i>Electricidad
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="pintura">
+                    <i class="bi bi-paint-bucket me-2"></i>Pintura
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="jardineria">
+                    <i class="bi bi-tree me-2"></i>Jardinería
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="limpieza">
+                    <i class="bi bi-droplet-half me-2"></i>Limpieza
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" data-category="reparaciones">
+                    <i class="bi bi-tools me-2"></i>Reparaciones
+                    <span class="badge bg-secondary ms-2">1</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Header -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h5 class="text-muted mb-0"><span id="resultCount">8</span> profesionales disponibles</h5>
+        </div>
+        <div class="col-md-6 text-end">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary active" id="viewList">
+                    <i class="bi bi-list-ul"></i> Lista
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="viewMap">
+                    <i class="bi bi-map"></i> Mapa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Cards -->
+    <div class="row g-4" id="professionalsList">
+        <div class="col-12 col-lg-6">
+            <div class="card professional-card h-100 shadow-sm border-0 hover-lift">
+                <div class="card-body p-4">
+                    <div class="d-flex gap-3">
+                        <!-- Avatar -->
+                        <div class="flex-shrink-0">
+                            <div class="avatar-circle bg-light d-flex align-items-center justify-content-center">
+                                <i class="bi bi-person text-muted fs-1"></i>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h5 class="card-title mb-1 fw-bold">Técnico</h5>
+                                    <p class="text-muted mb-2 small">Profesión</p>
+                                </div>
+                                <span class="badge bg-success-soft text-success px-3 py-2">Estado</span>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <div class="stars text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-dark fw-bold ms-1">1 - 5</span>
+                                </div>
+                                <span class="text-muted small">(reseñas)</span>
+                            </div>
+
+                            <!-- Info -->
+                            <div class="info-list mb-3">
+                                <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>trabajos</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                                    <i class="bi bi-clock-history"></i>
+                                    <span>años</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 text-muted small">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>ubicación</span>
+                                </div>
+                            </div>
+
+                            <!-- Services -->
+                            <div class="services-tags mb-3">
+                                <span class="badge bg-light text-dark me-1 mb-1">Servicios</span>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="text-muted small mb-3">
+                                Descripción
+                            </p>
+
+                            <!-- Price & Actions -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted d-block">Tarifa por hora</small>
+                                    <h4 class="text-success mb-0 fw-bold">$0</h4>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-dark rounded-pill px-3">
+                                        <i class="bi bi-telephone me-2"></i>Llamar
+                                    </button>
+                                    <button class="btn btn-dark rounded-pill px-3">Ver perfil</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="card professional-card h-100 shadow-sm border-0 hover-lift">
+                <div class="card-body p-4">
+                    <div class="d-flex gap-3">
+                        <!-- Avatar -->
+                        <div class="flex-shrink-0">
+                            <div class="avatar-circle bg-light d-flex align-items-center justify-content-center">
+                                <i class="bi bi-person text-muted fs-1"></i>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h5 class="card-title mb-1 fw-bold">Técnico</h5>
+                                    <p class="text-muted mb-2 small">Profesión</p>
+                                </div>
+                                <span class="badge bg-success-soft text-success px-3 py-2">Estado</span>
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <div class="stars text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-dark fw-bold ms-1">1 - 5</span>
+                                </div>
+                                <span class="text-muted small">(reseñas)</span>
+                            </div>
+
+                            <!-- Info -->
+                            <div class="info-list mb-3">
+                                <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                                    <i class="bi bi-briefcase"></i>
+                                    <span>trabajos</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                                    <i class="bi bi-clock-history"></i>
+                                    <span>años</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 text-muted small">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>ubicación</span>
+                                </div>
+                            </div>
+
+                            <!-- Services -->
+                            <div class="services-tags mb-3">
+                                <span class="badge bg-light text-dark me-1 mb-1">Servicios</span>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="text-muted small mb-3">
+                                Descripción
+                            </p>
+
+                            <!-- Price & Actions -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted d-block">Tarifa por hora</small>
+                                    <h4 class="text-success mb-0 fw-bold">$0</h4>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-dark rounded-pill px-3">
+                                        <i class="bi bi-telephone me-2"></i>Llamar
+                                    </button>
+                                    <button class="btn btn-dark rounded-pill px-3">Ver perfil</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .search-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .search-wrapper .input-group-text {
+        border-right: 0;
+    }
+
+    .search-wrapper .form-control:focus {
+        border-color: #dee2e6;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .category-pills .btn {
+        transition: all 0.3s ease;
+        border-width: 2px;
+    }
+
+    .category-pills .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .category-pills .btn.active {
+        background-color: #212529;
+        border-color: #212529;
+    }
+
+    .professional-card {
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .professional-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+
+    .avatar-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .bg-success-soft {
+        background-color: #d1f2eb;
+    }
+
+    .services-tags .badge {
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 6px;
+    }
+
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Category filter
+            $('.category-pills .btn').click(function() {
+                $('.category-pills .btn').removeClass('active');
+                $(this).addClass('active');
+                
+                var category = $(this).data('category');
+                // Aquí iría la lógica para filtrar los profesionales
+                console.log('Filtrando por categoría:', category);
+            });
+
+            // View toggle
+            $('#viewList, #viewMap').click(function() {
+                $('#viewList, #viewMap').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // Search functionality
+            $('#searchInput').on('input', function() {
+                var searchTerm = $(this).val().toLowerCase();
+                // Aquí iría la lógica de búsqueda
+                console.log('Buscando:', searchTerm);
+            });
+        });
+    </script>
+}

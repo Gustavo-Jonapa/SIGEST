@@ -1,0 +1,365 @@
+@{
+    ViewBag.Title = "Perfil - SIGEST";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="fw-bold mb-1">Mi Perfil</h2>
+            <p class="text-muted">Administra tu información personal</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Left Column - Profile Card -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center p-4">
+                    <!-- Avatar -->
+                    <div class="position-relative d-inline-block mb-3">
+                        <div class="profile-avatar mx-auto bg-light d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person text-muted" style="font-size: 4rem;"></i>
+                        </div>
+                        <button class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 shadow-sm" 
+                                style="width: 40px; height: 40px;">
+                            <i class="bi bi-camera-fill"></i>
+                        </button>
+                    </div>
+
+                    <!-- User Info -->
+                    <h4 class="fw-bold mb-1">Cliente</h4>
+                    <p class="text-muted mb-3">Cliente desde 2026</p>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info text-start mb-4">
+                        <div class="d-flex align-items-center mb-2 text-muted">
+                            <i class="bi bi-envelope me-3"></i>
+                            <span class="small">cliente@ejemplo.com</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2 text-muted">
+                            <i class="bi bi-telephone me-3"></i>
+                            <span class="small">+52 961 1234 5678</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted">
+                            <i class="bi bi-geo-alt me-3"></i>
+                            <span class="small">Dirección</span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Statistics -->
+                    <div class="statistics">
+                        <h6 class="text-muted text-uppercase small mb-3">Estadísticas</h6>
+                        <div class="stat-item mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted">Servicios contratados</span>
+                                <span class="fw-bold fs-5">2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Card -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-3">
+                    <h6 class="fw-bold mb-3">Acciones rápidas</h6>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary rounded-pill text-start">
+                            <i class="bi bi-bell me-2"></i>Notificaciones
+                        </button>
+                        <button class="btn btn-outline-primary rounded-pill text-start">
+                            <i class="bi bi-shield-check me-2"></i>Seguridad
+                        </button>
+                        <button class="btn btn-outline-danger rounded-pill text-start">
+                            <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Information Forms -->
+        <div class="col-lg-8">
+            <!-- Personal Information Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0">Información Personal</h5>
+                        <button class="btn btn-outline-primary btn-sm rounded-pill px-3" id="editPersonalInfo">
+                            <i class="bi bi-pencil me-2"></i>Editar
+                        </button>
+                    </div>
+                    
+                    <p class="text-muted small mb-4">Actualiza tu información de contacto y dirección</p>
+
+                    <form id="personalInfoForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Nombre completo</label>
+                                <input type="text" class="form-control" value="Cliente" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Correo electrónico</label>
+                                <input type="email" class="form-control" value="cliente@ejemplo.com" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Teléfono</label>
+                                <input type="tel" class="form-control" value="+52 961 1234 5678" disabled>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Biografía</label>
+                                <textarea class="form-control" rows="2" disabled>Cliente de SIGEST.</textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-none mt-3" id="personalInfoActions">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="bi bi-check-circle me-2"></i>Guardar cambios
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" id="cancelPersonalInfo">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Address Information Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0">Dirección</h5>
+                        <button class="btn btn-outline-primary btn-sm rounded-pill px-3" id="editAddress">
+                            <i class="bi bi-pencil me-2"></i>Editar
+                        </button>
+                    </div>
+
+                    <form id="addressForm">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold">Calle y número</label>
+                                <input type="text" class="form-control" placeholder="Info de calle" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Colonia</label>
+                                <input type="text" class="form-control" placeholder="Colonia" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Código Postal</label>
+                                <input type="text" class="form-control" placeholder="CP" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Ciudad</label>
+                                <input type="text" class="form-control" value="Ingresar Ciudad" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Estado</label>
+                                <input type="text" class="form-control" value="Ingresar Estado" disabled>
+                            </div>
+                        </div>
+
+                        <div class="d-none mt-3" id="addressActions">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                <i class="bi bi-check-circle me-2"></i>Guardar cambios
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" id="cancelAddress">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Preferences Card -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Preferencias</h5>
+
+                    <div class="preferences-list">
+                        <div class="preference-item d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">Notificaciones por correo</h6>
+                                <p class="text-muted small mb-0">Recibe actualizaciones de tus servicios</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+
+                        <div class="preference-item d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">Notificaciones push</h6>
+                                <p class="text-muted small mb-0">Alertas en tiempo real de cambios</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+
+                        <div class="preference-item d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                            <div>
+                                <h6 class="mb-1">Ofertas y promociones</h6>
+                                <p class="text-muted small mb-0">Recibe ofertas especiales de profesionales</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+
+                        <div class="preference-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Modo oscuro</h6>
+                                <p class="text-muted small mb-0">Cambiar a tema oscuro</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Card -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Seguridad</h5>
+
+                    <div class="security-actions">
+                        <button class="btn btn-outline-danger w-100 rounded-pill text-start">
+                            <i class="bi bi-trash me-2"></i>Eliminar cuenta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid #f8f9fa;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info i {
+        font-size: 1.1rem;
+    }
+
+    .stat-item {
+        padding: 0.75rem;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+    .form-control:disabled {
+        background-color: #f8f9fa;
+        border-color: #e9ecef;
+    }
+
+    .form-control:not(:disabled) {
+        border-color: #0d6efd;
+    }
+
+    .form-switch .form-check-input {
+        width: 3rem;
+        height: 1.5rem;
+        cursor: pointer;
+    }
+
+    .form-switch .form-check-input:checked {
+        background-color: #198754;
+        border-color: #198754;
+    }
+
+    .preference-item:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .security-actions .btn {
+        transition: all 0.3s ease;
+    }
+
+    .security-actions .btn:hover {
+        transform: translateX(5px);
+    }
+
+    .d-none.show {
+        animation: fadeIn 0.3s ease;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Edit Personal Info
+            $('#editPersonalInfo').click(function() {
+                $('#personalInfoForm input, #personalInfoForm textarea').prop('disabled', false);
+                $('#personalInfoActions').removeClass('d-none').addClass('show');
+                $(this).addClass('d-none');
+            });
+
+            $('#cancelPersonalInfo').click(function() {
+                $('#personalInfoForm input, #personalInfoForm textarea').prop('disabled', true);
+                $('#personalInfoActions').addClass('d-none').removeClass('show');
+                $('#editPersonalInfo').removeClass('d-none');
+            });
+
+            $('#personalInfoForm').submit(function(e) {
+                e.preventDefault();
+                // Aquí iría la lógica para guardar los cambios
+                alert('Cambios guardados exitosamente');
+                $('#personalInfoForm input, #personalInfoForm textarea').prop('disabled', true);
+                $('#personalInfoActions').addClass('d-none').removeClass('show');
+                $('#editPersonalInfo').removeClass('d-none');
+            });
+
+            // Edit Address
+            $('#editAddress').click(function() {
+                $('#addressForm input').prop('disabled', false);
+                $('#addressActions').removeClass('d-none').addClass('show');
+                $(this).addClass('d-none');
+            });
+
+            $('#cancelAddress').click(function() {
+                $('#addressForm input').prop('disabled', true);
+                $('#addressActions').addClass('d-none').removeClass('show');
+                $('#editAddress').removeClass('d-none');
+            });
+
+            $('#addressForm').submit(function(e) {
+                e.preventDefault();
+                // Aquí iría la lógica para guardar los cambios
+                alert('Dirección actualizada exitosamente');
+                $('#addressForm input').prop('disabled', true);
+                $('#addressActions').addClass('d-none').removeClass('show');
+                $('#editAddress').removeClass('d-none');
+            });
+
+            // Preferences switches
+            $('.form-check-input').change(function() {
+                var preference = $(this).closest('.preference-item').find('h6').text();
+                var status = $(this).is(':checked') ? 'activada' : 'desactivada';
+                console.log('Preferencia ' + preference + ' ' + status);
+            });
+        });
+    </script>
+}

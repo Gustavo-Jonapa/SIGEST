@@ -1,0 +1,505 @@
+@{
+    ViewBag.Title = "Dashboard - SIGEST";
+    Layout = "~/Views/Shared/_LayoutTecnico.cshtml";
+}
+
+<div class="container-fluid px-4 py-4">
+    <!-- Welcome Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="fw-bold mb-2">Dashboard</h2>
+            <p class="text-muted">Bienvenido de nuevo, Sergio. Aquí está tu resumen del mes.</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <!-- Earnings Card -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm h-100 card-earnings">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Ganancias del mes</p>
+                            <h2 class="fw-bold mb-0">$15,420</h2>
+                        </div>
+                        <div class="stat-icon bg-success-soft">
+                            <i class="bi bi-currency-dollar text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Jobs -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm h-100 card-completed">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Trabajos completados</p>
+                            <h2 class="fw-bold mb-0">23</h2>
+                            <small class="text-muted">Este mes</small>
+                        </div>
+                        <div class="stat-icon bg-primary-soft">
+                            <i class="bi bi-check-circle text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Average Rating -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm h-100 card-rating">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Calificación promedio</p>
+                            <h2 class="fw-bold mb-0 d-flex align-items-center">
+                                4.8
+                                <i class="bi bi-star-fill text-warning ms-2" style="font-size: 1.5rem;"></i>
+                            </h2>
+                            <small class="text-muted">124 reseñas</small>
+                        </div>
+                        <div class="stat-icon bg-warning-soft">
+                            <i class="bi bi-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm h-100 card-pending">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <p class="text-muted small mb-1">Solicitudes pendientes</p>
+                            <h2 class="fw-bold mb-0 text-danger">3</h2>
+                            <small class="text-muted">Requieren atención</small>
+                        </div>
+                        <div class="stat-icon bg-danger-soft">
+                            <i class="bi bi-clock-history text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Left Column - Service Requests -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h5 class="fw-bold mb-1">Solicitudes de Servicio</h5>
+                            <p class="text-muted small mb-0">Nuevas solicitudes de clientes</p>
+                        </div>
+                        <span class="badge bg-danger-soft text-danger px-3 py-2 rounded-pill">
+                            3 pendientes
+                        </span>
+                    </div>
+
+                    <!-- Tabs -->
+                    <ul class="nav nav-pills mb-4" id="requestsTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill px-4" id="pendientes-tab" 
+                                    data-bs-toggle="pill" data-bs-target="#pendientes" type="button" role="tab">
+                                Pendientes (3)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill px-4" id="aceptadas-tab" 
+                                    data-bs-toggle="pill" data-bs-target="#aceptadas" type="button" role="tab">
+                                Aceptadas
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill px-4" id="todas-tab" 
+                                    data-bs-toggle="pill" data-bs-target="#todas" type="button" role="tab">
+                                Todas
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="requestsTabContent">
+                        <div class="tab-pane fade show active" id="pendientes" role="tabpanel">
+                            <!-- Request 1 - Urgent -->
+                            <div class="request-card mb-3">
+                                <div class="d-flex gap-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="client-avatar bg-primary-soft text-primary">
+                                            <i class="bi bi-person-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Reparación de fuga urgente</h6>
+                                                <p class="text-muted small mb-0">María</p>
+                                            </div>
+                                            <span class="badge bg-danger px-3 py-1 rounded-pill">Urgente</span>
+                                        </div>
+
+                                        <p class="text-muted small mb-3">
+                                            Fuga importante en baño, necesito atención urgente
+                                        </p>
+
+                                        <div class="d-flex flex-wrap gap-3 mb-3">
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-calendar3 me-2"></i>
+                                                16 abr
+                                            </div>
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-clock me-2"></i>
+                                                10:00 AM
+                                            </div>
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-geo-alt me-2"></i>
+                                                Col. Centro, Tuxtla Gtz
+                                            </div>
+                                            <div class="d-flex align-items-center text-success small fw-semibold">
+                                                <i class="bi bi-currency-dollar me-2"></i>
+                                                $500
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-success rounded-pill px-4 flex-grow-1">
+                                                <i class="bi bi-check-circle me-2"></i>Aceptar
+                                            </button>
+                                            <button class="btn btn-outline-danger rounded-pill px-4">
+                                                <i class="bi bi-x-circle me-2"></i>Rechazar
+                                            </button>
+                                            <button class="btn btn-outline-secondary rounded-circle">
+                                                <i class="bi bi-chat-dots"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Request 2 -->
+                            <div class="request-card mb-3">
+                                <div class="d-flex gap-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="client-avatar bg-info-soft text-info">
+                                            <i class="bi bi-person-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Instalación de regadera</h6>
+                                                <p class="text-muted small mb-0">Carlos Pérez</p>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-muted small mb-3">
+                                            Necesito instalar una regadera nueva en el baño principal
+                                        </p>
+
+                                        <div class="d-flex flex-wrap gap-3 mb-3">
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-calendar3 me-2"></i>
+                                                18 abr
+                                            </div>
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-clock me-2"></i>
+                                                2:00 PM
+                                            </div>
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-geo-alt me-2"></i>
+                                                Col. Centro, Tuxtla Gtz
+                                            </div>
+                                            <div class="d-flex align-items-center text-success small fw-semibold">
+                                                <i class="bi bi-currency-dollar me-2"></i>
+                                                $350
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-success rounded-pill px-4 flex-grow-1">
+                                                <i class="bi bi-check-circle me-2"></i>Aceptar
+                                            </button>
+                                            <button class="btn btn-outline-danger rounded-pill px-4">
+                                                <i class="bi bi-x-circle me-2"></i>Rechazar
+                                            </button>
+                                            <button class="btn btn-outline-secondary rounded-circle">
+                                                <i class="bi bi-chat-dots"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Request 3 -->
+                            <div class="request-card">
+                                <div class="d-flex gap-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="client-avatar bg-warning-soft text-warning">
+                                            <i class="bi bi-person-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Reparación de lavabo</h6>
+                                                <p class="text-muted small mb-0">Ana González</p>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-muted small mb-3">
+                                            El lavabo de la cocina está goteando constantemente
+                                        </p>
+
+                                        <div class="d-flex flex-wrap gap-3 mb-3">
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-calendar3 me-2"></i>
+                                                19 abr
+                                            </div>
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-clock me-2"></i>
+                                                11:00 AM
+                                            </div>
+                                            <div class="d-flex align-items-center text-muted small">
+                                                <i class="bi bi-geo-alt me-2"></i>
+                                                Col. La Lomita
+                                            </div>
+                                            <div class="d-flex align-items-center text-success small fw-semibold">
+                                                <i class="bi bi-currency-dollar me-2"></i>
+                                                $400
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-success rounded-pill px-4 flex-grow-1">
+                                                <i class="bi bi-check-circle me-2"></i>Aceptar
+                                            </button>
+                                            <button class="btn btn-outline-danger rounded-pill px-4">
+                                                <i class="bi bi-x-circle me-2"></i>Rechazar
+                                            </button>
+                                            <button class="btn btn-outline-secondary rounded-circle">
+                                                <i class="bi bi-chat-dots"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="aceptadas" role="tabpanel">
+                            <div class="alert alert-info border-0 text-center py-5">
+                                <i class="bi bi-check-circle fs-1 d-block mb-3"></i>
+                                <h5>Solicitudes Aceptadas</h5>
+                                <p class="text-muted">Aquí aparecerán las solicitudes que has aceptado</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="todas" role="tabpanel">
+                            <div class="alert alert-secondary border-0 text-center py-5">
+                                <i class="bi bi-list-ul fs-1 d-block mb-3"></i>
+                                <h5>Todas las Solicitudes</h5>
+                                <p class="text-muted">Vista completa de todas las solicitudes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Upcoming Jobs -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h5 class="fw-bold mb-1">Próximos Trabajos</h5>
+                            <p class="text-muted small mb-0">Tus servicios programados</p>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Job 1 -->
+                    <div class="upcoming-job-card mb-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="fw-bold mb-0">Reparación de fuga</h6>
+                            <span class="badge bg-success-soft text-success px-2 py-1 rounded-pill small">$600</span>
+                        </div>
+                        <p class="text-muted small mb-2">Pedro Martínez</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge bg-light text-dark">
+                                <i class="bi bi-calendar3 me-1"></i>15 abr
+                            </span>
+                            <span class="badge bg-light text-dark">
+                                <i class="bi bi-clock me-1"></i>3:00 PM
+                            </span>
+                            <span class="badge bg-light text-dark">
+                                <i class="bi bi-geo-alt me-1"></i>Col.
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Upcoming Job 2 -->
+                    <div class="upcoming-job-card mb-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="fw-bold mb-0">Instalación de calentador</h6>
+                            <span class="badge bg-success-soft text-success px-2 py-1 rounded-pill small">$1200</span>
+                        </div>
+                        <p class="text-muted small mb-2">Laura Sánchez</p>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            <span class="badge bg-light text-dark">
+                                <i class="bi bi-calendar3 me-1"></i>16 abr
+                            </span>
+                            <span class="badge bg-light text-dark">
+                                <i class="bi bi-clock me-1"></i>9:00 AM
+                            </span>
+                            <span class="badge bg-light text-dark">
+                                <i class="bi bi-geo-alt me-1"></i>Col.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-primary rounded-pill px-4">
+                            Ver todos los trabajos
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .stat-card {
+        transition: all 0.3s ease;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+
+    .card-earnings {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .stat-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.75rem;
+    }
+
+    .bg-primary-soft {
+        background-color: #cfe2ff;
+    }
+
+    .bg-success-soft {
+        background-color: #d1f2eb;
+    }
+
+    .bg-warning-soft {
+        background-color: #fff3cd;
+    }
+
+    .bg-danger-soft {
+        background-color: #f8d7da;
+    }
+
+    .bg-info-soft {
+        background-color: #cff4fc;
+    }
+
+    .nav-pills .nav-link {
+        color: #6c757d;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .nav-pills .nav-link:hover {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #212529;
+        color: white;
+    }
+
+    .request-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .request-card:hover {
+        background-color: #e9ecef;
+        transform: translateX(5px);
+    }
+
+    .client-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .upcoming-job-card {
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .upcoming-job-card:hover {
+        background-color: #e9ecef;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Accept request
+            $('.btn-success').click(function() {
+                if (confirm('¿Deseas aceptar esta solicitud?')) {
+                    $(this).closest('.request-card').fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                }
+            });
+
+            // Reject request
+            $('.btn-outline-danger').click(function() {
+                if (confirm('¿Deseas rechazar esta solicitud?')) {
+                    $(this).closest('.request-card').fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                }
+            });
+
+            // Chat button
+            $('.btn-outline-secondary.rounded-circle').click(function() {
+                alert('Función de chat próximamente');
+            });
+        });
+    </script>
+}

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #212529;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --info-color: #0dcaf0;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --light-bg: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar-custom {
+            background-color: #ffffff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #6c757d;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--primary-color);
+            background-color: #e9ecef;
+            font-weight: 600;
+        }
+
+        .navbar-nav .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .navbar-nav .nav-link i {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .notification-bell:hover {
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        .user-avatar-wrapper {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .user-status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 14px;
+            height: 14px;
+            background-color: #198754;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info .user-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            margin-bottom: 0;
+        }
+
+        .user-info .user-role {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 0.75rem;
+            min-width: 220px;
+        }
+
+        .dropdown-item {
+            padding: 0.625rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: calc(100vh - 80px);
+            padding-top: 80px;
+        }
+
+        /* Utilities */
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-text-fill-color: transparent;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4391 100%);
+        }
+
+        .animate-slide-down {
+            animation: slideInDown 0.4s ease-out;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container-fluid px-4">
+            <!-- Brand -->
+            <a class="navbar-brand" href="@Url.Action("DashboardTecnico", "Tecnico")">
+                SIGEST
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fs-3"></i>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "DashboardTecnico" ? "active" : "")" 
+                           href="@Url.Action("DashboardTecnico", "Tecnico")">
+                            <i class="bi bi-grid-1x2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "PerfilTecnico" ? "active" : "")" 
+                           href="@Url.Action("PerfilTecnico", "Tecnico")">
+                            <i class="bi bi-person"></i>Mi Perfil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-clock-history"></i>Historial
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-gear"></i>Configuración
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- User Menu -->
+                <div class="user-menu">
+                    <!-- Notifications -->
+                    <div class="notification-bell">
+                        <i class="bi bi-bell fs-5 text-muted"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+
+                    <!-- User Info (Desktop) -->
+                    <div class="user-info d-none d-lg-block">
+                        <p class="user-name">Sergio Cs</p>
+                        <p class="user-role">Profesional</p>
+                    </div>
+
+                    <!-- User Avatar & Dropdown -->
+                    <div class="dropdown">
+                        <div class="user-avatar-wrapper" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-avatar">
+                                SC
+                            </div>
+                            <div class="user-status"></div>
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3">
+                            <li class="px-2 pb-2 mb-2 border-bottom">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; font-size: 0.8rem;">
+                                        SC
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 fw-semibold small">Sergio Cs</p>
+                                        <p class="mb-0 text-muted" style="font-size: 0.75rem;">Profesional</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="@Url.Action("PerfilTecnico", "Tecnico")">
+                                    <i class="bi bi-person me-2"></i>Mi Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-wallet2 me-2"></i>Mis Ganancias
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-star me-2"></i>Mis Reseñas
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="bi bi-gear me-2"></i>Configuración
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider my-2"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="#">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content animate-fade-in">
+        @RenderBody()
+    </main>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            // Auto-hide alerts
+            setTimeout(function() {
+                $('.alert').not('.alert-permanent').fadeOut('slow');
+            }, 5000);
+
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar-custom').addClass('shadow-lg');
+                } else {
+                    $('.navbar-custom').removeClass('shadow-lg');
+                }
+            });
+
+            // Notification bell click
+            $('.notification-bell').click(function() {
+                alert('Panel de notificaciones - Próximamente');
+            });
+
+            // Add ripple effect to buttons
+            $('button, .btn').click(function(e) {
+                var ripple = $('<span class="ripple"></span>');
+                $(this).append(ripple);
+                
+                var x = e.pageX - $(this).offset().left;
+                var y = e.pageY - $(this).offset().top;
+                
+                ripple.css({
+                    left: x + 'px',
+                    top: y + 'px'
+                });
+                
+                setTimeout(function() {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    </script>
+
+    <style>
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 100px;
+            height: 100px;
+            margin-top: -50px;
+            margin-left: -50px;
+            animation: ripple 0.6s;
+            pointer-events: none;
+        }
+    </style>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
