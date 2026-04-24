@@ -1,0 +1,760 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - SIGEST</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1a5fa8;
+            --secondary-blue: #2876c7;
+            --dark-blue: #14477a;
+            --light-blue: #e8f2fb;
+            --accent-blue: #3d8fd1;
+            --success-green: #198754;
+            --danger-red: #dc3545;
+            --text-dark: #2c3e50;
+            --text-muted: #6c757d;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e8f2fb 0%, #f8f9fa 50%, #e8f2fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Elements */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(26, 95, 168, 0.1) 0%, rgba(61, 143, 209, 0.05) 100%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(40, 118, 199, 0.1) 0%, rgba(26, 95, 168, 0.05) 100%);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        .login-container {
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(26, 95, 168, 0.15);
+            display: flex;
+            min-height: 650px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        /* Left Side - Branding */
+        .branding-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branding-side::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .brand-logo {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo i {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+            animation: rotate 20s linear infinite;
+        }
+
+        .brand-logo h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .brand-description {
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 400px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-list li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            opacity: 0;
+            animation: fadeInLeft 0.6s ease-out forwards;
+        }
+
+        .feature-list li:nth-child(1) { animation-delay: 0.2s; }
+        .feature-list li:nth-child(2) { animation-delay: 0.4s; }
+        .feature-list li:nth-child(3) { animation-delay: 0.6s; }
+
+        .feature-list i {
+            font-size: 24px;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* Right Side - Forms */
+        .form-side {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Tab Navigation */
+        .form-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: var(--light-gray);
+            padding: 6px;
+            border-radius: 12px;
+        }
+
+        .form-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .form-tab.active {
+            background: var(--white);
+            color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(26, 95, 168, 0.1);
+        }
+
+        .form-tab:hover:not(.active) {
+            color: var(--primary-blue);
+        }
+
+        /* Form Styles */
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(26, 95, 168, 0.1);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .input-icon:hover {
+            color: var(--primary-blue);
+        }
+
+        .form-check {
+            margin-bottom: 20px;
+        }
+
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .form-check-label {
+            margin-left: 10px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* Role Selection */
+        .role-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .role-card {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .role-card:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        .role-card.selected {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+            box-shadow: 0 4px 12px rgba(26, 95, 168, 0.15);
+        }
+
+        .role-card i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .role-card h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .role-card input[type="radio"] {
+            display: none;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border: none;
+            border-radius: 10px;
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 95, 168, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 95, 168, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .divider span {
+            padding: 0 15px;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading State */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Left Side - Branding -->
+            <div class="branding-side">
+                <div class="brand-logo">
+                    <i class="bi bi-tools"></i>
+                    <h1>SIGEST</h1>
+                </div>
+                <p class="brand-description">
+                    Sistema Integral de Gestión y Asignación de Servicios Técnicos
+                </p>
+                <ul class="feature-list">
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Conecta con profesionales verificados</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-shield-check"></i>
+                        <span>Servicios garantizados y seguros</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-star-fill"></i>
+                        <span>Sistema de calificaciones confiable</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Side - Forms -->
+            <div class="form-side">
+                <div class="form-header">
+                    <h2>Bienvenido</h2>
+                    <p>Inicia sesión o crea una cuenta para continuar</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="form-tabs">
+                    <button class="form-tab active" onclick="switchTab('login')">
+                        Iniciar Sesión
+                    </button>
+                    <button class="form-tab" onclick="switchTab('register')">
+                        Registrarse
+                    </button>
+                </div>
+
+                <!-- Login Form -->
+                <div class="form-content active" id="login-form">
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="login-email">Usuario o Correo Electrónico</label>
+                            <input type="text" class="form-control" id="login-email" 
+                                   placeholder="admin" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="login-password" 
+                                       placeholder="••••••••" required>
+                                <i class="bi bi-eye input-icon" onclick="togglePassword('login-password', this)"></i>
+                            </div>
+                        </div>
+
+                        <div class="forgot-password">
+                            <a href="#" onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="remember-me">
+                            <label class="form-check-label" for="remember-me">
+                                Recordar usuario
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            Iniciar sesión
+                        </button>
+                    </form>
+
+                    <div class="form-footer">
+                        ¿No tienes cuenta? 
+                        <a href="#" onclick="switchTab('register')">Regístrate aquí</a>
+                    </div>
+                </div>
+
+                <!-- Register Form -->
+                <div class="form-content" id="register-form">
+                    <form id="registerForm" onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label>Tipo de cuenta</label>
+                            <div class="role-selection">
+                                <label class="role-card selected">
+                                    <input type="radio" name="role" value="cliente" checked>
+                                    <i class="bi bi-person-circle"></i>
+                                    <h5>Cliente</h5>
+                                </label>
+                                <label class="role-card">
+                                    <input type="radio" name="role" value="tecnico">
+                                    <i class="bi bi-tools"></i>
+                                    <h5>Técnico</h5>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-name">Nombre completo</label>
+                            <input type="text" class="form-control" id="register-name" 
+                                   placeholder="Juan Pérez" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-email">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="register-email" 
+                                   placeholder="correo@ejemplo.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-phone">Teléfono</label>
+                            <input type="tel" class="form-control" id="register-phone" 
+                                   placeholder="+52 961 123 4567" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-password">Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="register-password" 
+                                       placeholder="Mínimo 8 caracteres" required minlength="8">
+                                <i class="bi bi-eye input-icon" onclick="togglePassword('register-password', this)"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-password-confirm">Confirmar Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="register-password-confirm" 
+                                       placeholder="Repite tu contraseña" required minlength="8">
+                                <i class="bi bi-eye input-icon" onclick="togglePassword('register-password-confirm', this)"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                Acepto los <a href="#" style="color: var(--primary-blue);">términos y condiciones</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            Crear cuenta
+                        </button>
+                    </form>
+
+                    <div class="form-footer">
+                        ¿Ya tienes cuenta? 
+                        <a href="#" onclick="switchTab('login')">Inicia sesión aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Switch between login and register tabs
+        function switchTab(tab) {
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.form-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update form content
+            const forms = document.querySelectorAll('.form-content');
+            forms.forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                document.getElementById('register-form').classList.add('active');
+            }
+        }
+
+        // Toggle password visibility
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+
+        // Role card selection
+        document.querySelectorAll('.role-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                this.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+
+        // Handle login form submission
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const remember = document.getElementById('remember-me').checked;
+
+            const btn = e.target.querySelector('.btn-primary');
+            btn.classList.add('btn-loading');
+            btn.textContent = 'Iniciando sesión...';
+
+            // Simular llamada al servidor
+            setTimeout(() => {
+                // Aquí iría la lógica real de autenticación
+                console.log('Login:', { email, password, remember });
+                
+                // Redirigir según el tipo de usuario
+                // window.location.href = '/Home/Inicio'; // Para clientes
+                // window.location.href = '/Tecnico/Dashboard'; // Para técnicos
+                
+                alert('Inicio de sesión exitoso!\n\nUsuario: ' + email);
+                btn.classList.remove('btn-loading');
+                btn.textContent = 'Iniciar sesión';
+            }, 2000);
+        }
+
+        // Handle register form submission
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-password-confirm').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+            const terms = document.getElementById('terms').checked;
+
+            // Validar contraseñas
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            if (!terms) {
+                alert('Debes aceptar los términos y condiciones');
+                return;
+            }
+
+            const btn = e.target.querySelector('.btn-primary');
+            btn.classList.add('btn-loading');
+            btn.textContent = 'Creando cuenta...';
+
+            // Simular llamada al servidor
+            setTimeout(() => {
+                // Aquí iría la lógica real de registro
+                console.log('Register:', { name, email, phone, password, role, terms });
+                
+                alert('¡Cuenta creada exitosamente!\n\nTipo: ' + role + '\nCorreo: ' + email);
+                btn.classList.remove('btn-loading');
+                btn.textContent = 'Crear cuenta';
+                
+                // Cambiar a la pestaña de login
+                switchTab('login');
+            }, 2000);
+        }
+
+        // Show forgot password dialog
+        function showForgotPassword() {
+            const email = prompt('Ingresa tu correo electrónico para recuperar tu contraseña:');
+            if (email) {
+                alert('Se ha enviado un correo a ' + email + ' con instrucciones para recuperar tu contraseña.');
+            }
+        }
+
+        // Add keyboard shortcut for tab switching
+        document.addEventListener('keydown', function(e) {
+            if (e.altKey && e.key === 'l') {
+                switchTab('login');
+            } else if (e.altKey && e.key === 'r') {
+                switchTab('register');
+            }
+        });
+    </script>
+</body>
+</html>
