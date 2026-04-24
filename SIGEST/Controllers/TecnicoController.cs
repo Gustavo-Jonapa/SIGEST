@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace SIGEST.Controllers
 {
-    public class TecnicoController : Controller
+	[Authorize]
+	public class TecnicoController : Controller
     {
         // GET: Tecnico
         public ActionResult DashboardTecnico()
