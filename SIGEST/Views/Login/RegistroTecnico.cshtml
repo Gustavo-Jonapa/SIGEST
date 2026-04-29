@@ -1,0 +1,641 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Técnico - SIGEST</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1a5fa8;
+            --secondary-blue: #2876c7;
+            --success-green: #198754;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e8f2fb 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .registration-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dee2e6;
+            z-index: 0;
+        }
+
+        .step {
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #dee2e6;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .step.active {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .step.completed {
+            border-color: var(--success-green);
+            background: var(--success-green);
+            color: white;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .document-upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .document-upload-area:hover {
+            border-color: var(--primary-blue);
+            background: #e8f2fb;
+        }
+
+        .document-upload-area.dragover {
+            border-color: var(--primary-blue);
+            background: #cfe2ff;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .document-item.uploaded {
+            background: #d1f2eb;
+            border: 1px solid #198754;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .alert-info {
+            background: #e8f2fb;
+            border: none;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #fff3cd;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Registro de Técnico Profesional</h2>
+            <p class="text-muted">Completa tu perfil para comenzar a ofrecer tus servicios</p>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" id="step-1">1</div>
+            <div class="step" id="step-2">2</div>
+            <div class="step" id="step-3">3</div>
+            <div class="step" id="step-4">4</div>
+        </div>
+
+        <form id="registrationForm" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <!-- PASO 1: Información Personal -->
+            <div class="step-content active" id="content-1">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-3">Paso 1: Información Personal</h4>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label class="form-label">Nombre Completo *</label>
+                                <input type="text" class="form-control" name="Name" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Correo Electrónico *</label>
+                                <input type="email" class="form-control" name="Email" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono *</label>
+                                <input type="tel" class="form-control" name="Phone" placeholder="961 123 4567" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Contraseña *</label>
+                                <input type="password" class="form-control" name="Password" minlength="8" required>
+                                <small class="text-muted">Mínimo 8 caracteres</small>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Confirmar Contraseña *</label>
+                                <input type="password" class="form-control" name="ConfirmPassword" minlength="8" required>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+                                Siguiente <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 2: Información Profesional -->
+            <div class="step-content" id="content-2">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-3">Paso 2: Información Profesional</h4>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Especialidad Principal *</label>
+                                <select class="form-select" name="Especialidad" required>
+                                    <option value="">Selecciona...</option>
+                                    <option value="Plomería">Plomería</option>
+                                    <option value="Electricidad">Electricidad</option>
+                                    <option value="Carpintería">Carpintería</option>
+                                    <option value="Cerrajería">Cerrajería</option>
+                                    <option value="Pintura">Pintura</option>
+                                    <option value="Jardinería">Jardinería</option>
+                                    <option value="Limpieza">Limpieza</option>
+                                    <option value="Reparaciones Generales">Reparaciones Generales</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Años de Experiencia *</label>
+                                <input type="number" class="form-control" name="AniosExperiencia" min="0" max="50" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Dirección / Colonia *</label>
+                                <input type="text" class="form-control" name="Direccion" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Ciudad *</label>
+                                <input type="text" class="form-control" name="Ciudad" value="Tuxtla Gutiérrez" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Estado *</label>
+                                <input type="text" class="form-control" name="Estado" value="Chiapas" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Tarifa por Hora (MXN) *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" name="TarifaHora" min="50" step="10" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Tarifa por Visita (MXN)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" name="TarifaVisita" min="0" step="10">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Descripción Profesional</label>
+                                <textarea class="form-control" name="Descripcion" rows="3" 
+                                    placeholder="Cuéntanos sobre tu experiencia y servicios que ofreces..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-outline-secondary" onclick="previousStep(2)">
+                                <i class="bi bi-arrow-left"></i> Anterior
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                                Siguiente <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 3: Documentos de Verificación -->
+            <div class="step-content" id="content-3">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-3">Paso 3: Documentos de Verificación</h4>
+                        
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>Documentos Requeridos:</strong> Para garantizar la confianza de nuestros clientes, 
+                            necesitamos verificar tu identidad. Los documentos marcados con * son obligatorios.
+                        </div>
+
+                        <!-- INE Frente -->
+                        <div class="document-item mb-3" id="doc-ine-frente">
+                            <div>
+                                <h6 class="mb-1"><i class="bi bi-card-heading me-2"></i>INE (Frente) *</h6>
+                                <small class="text-muted">Imagen clara de tu credencial de elector</small>
+                            </div>
+                            <div>
+                                <input type="file" id="file-ine-frente" class="d-none" accept="image/*,.pdf" 
+                                    onchange="handleFileSelect('ine-frente', this)">
+                                <button type="button" class="btn btn-sm btn-outline-primary" 
+                                    onclick="document.getElementById('file-ine-frente').click()">
+                                    <i class="bi bi-upload"></i> Subir
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- INE Reverso -->
+                        <div class="document-item mb-3" id="doc-ine-reverso">
+                            <div>
+                                <h6 class="mb-1"><i class="bi bi-card-heading me-2"></i>INE (Reverso) *</h6>
+                                <small class="text-muted">Imagen clara del reverso de tu credencial</small>
+                            </div>
+                            <div>
+                                <input type="file" id="file-ine-reverso" class="d-none" accept="image/*,.pdf" 
+                                    onchange="handleFileSelect('ine-reverso', this)">
+                                <button type="button" class="btn btn-sm btn-outline-primary" 
+                                    onclick="document.getElementById('file-ine-reverso').click()">
+                                    <i class="bi bi-upload"></i> Subir
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Comprobante de Domicilio -->
+                        <div class="document-item mb-3" id="doc-comprobante">
+                            <div>
+                                <h6 class="mb-1"><i class="bi bi-house me-2"></i>Comprobante de Domicilio *</h6>
+                                <small class="text-muted">Recibo de luz, agua o teléfono (máx. 3 meses)</small>
+                            </div>
+                            <div>
+                                <input type="file" id="file-comprobante" class="d-none" accept="image/*,.pdf" 
+                                    onchange="handleFileSelect('comprobante', this)">
+                                <button type="button" class="btn btn-sm btn-outline-primary" 
+                                    onclick="document.getElementById('file-comprobante').click()">
+                                    <i class="bi bi-upload"></i> Subir
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Foto de Perfil -->
+                        <div class="document-item mb-3" id="doc-foto-perfil">
+                            <div>
+                                <h6 class="mb-1"><i class="bi bi-person-circle me-2"></i>Foto de Perfil *</h6>
+                                <small class="text-muted">Fotografía clara de tu rostro</small>
+                            </div>
+                            <div>
+                                <input type="file" id="file-foto-perfil" class="d-none" accept="image/*" 
+                                    onchange="handleFileSelect('foto-perfil', this)">
+                                <button type="button" class="btn btn-sm btn-outline-primary" 
+                                    onclick="document.getElementById('file-foto-perfil').click()">
+                                    <i class="bi bi-upload"></i> Subir
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <p class="text-muted mb-2"><strong>Documentos Opcionales (mejoran tu perfil):</strong></p>
+
+                        <!-- Certificado -->
+                        <div class="document-item mb-3" id="doc-certificado">
+                            <div>
+                                <h6 class="mb-1"><i class="bi bi-award me-2"></i>Certificado de Capacitación</h6>
+                                <small class="text-muted">Diplomas, certificaciones o constancias</small>
+                            </div>
+                            <div>
+                                <input type="file" id="file-certificado" class="d-none" accept="image/*,.pdf" 
+                                    onchange="handleFileSelect('certificado', this)">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                    onclick="document.getElementById('file-certificado').click()">
+                                    <i class="bi bi-upload"></i> Subir
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Antecedentes -->
+                        <div class="document-item mb-3" id="doc-antecedentes">
+                            <div>
+                                <h6 class="mb-1"><i class="bi bi-shield-check me-2"></i>Carta de No Antecedentes</h6>
+                                <small class="text-muted">Carta de no antecedentes penales</small>
+                            </div>
+                            <div>
+                                <input type="file" id="file-antecedentes" class="d-none" accept="image/*,.pdf" 
+                                    onchange="handleFileSelect('antecedentes', this)">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                    onclick="document.getElementById('file-antecedentes').click()">
+                                    <i class="bi bi-upload"></i> Subir
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-outline-secondary" onclick="previousStep(3)">
+                                <i class="bi bi-arrow-left"></i> Anterior
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(3)" id="btn-continue-docs">
+                                Siguiente <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 4: Confirmación -->
+            <div class="step-content" id="content-4">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-3">Paso 4: Confirmación</h4>
+                        
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>¿Qué sigue?</strong>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Proceso de Verificación:</h6>
+                            <ol class="ps-3">
+                                <li class="mb-2">Tu cuenta será creada con estado <span class="badge bg-warning">Pendiente de Verificación</span></li>
+                                <li class="mb-2">Nuestro equipo revisará tus documentos en 24-48 horas</li>
+                                <li class="mb-2">Recibirás un correo con el resultado de la verificación</li>
+                                <li class="mb-2">Una vez aprobado, podrás comenzar a aceptar trabajos</li>
+                            </ol>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Mientras tanto:</h6>
+                            <div class="verification-badge mb-2">
+                                <i class="bi bi-exclamation-triangle"></i>
+                                Límite: 3 trabajos por mes
+                            </div>
+                            <div class="verification-badge">
+                                <i class="bi bi-cash-coin"></i>
+                                Monto máximo: $500 por trabajo
+                            </div>
+                            <p class="text-muted mt-2 small">Estos límites se eliminarán al verificar tu cuenta</p>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="acceptTerms" name="AcceptTerms" required>
+                            <label class="form-check-label" for="acceptTerms">
+                                Acepto los <a href="#" target="_blank">términos y condiciones</a> y la 
+                                <a href="#" target="_blank">política de privacidad</a>
+                            </label>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-outline-secondary" onclick="previousStep(4)">
+                                <i class="bi bi-arrow-left"></i> Anterior
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg" id="btn-submit">
+                                <i class="bi bi-check-circle me-2"></i> Crear mi Cuenta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Progress Info -->
+        <div class="text-center mt-3">
+            <small class="text-muted">
+                ¿Ya tienes cuenta? <a href="@Url.Action("Login", "Login")">Inicia sesión aquí</a>
+            </small>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentStep = 1;
+        let uploadedFiles = {};
+
+        function nextStep(step) {
+            // Validar paso actual
+            if (!validateStep(step)) {
+                return;
+            }
+
+            // Ocultar paso actual
+            document.getElementById('content-' + step).classList.remove('active');
+            document.getElementById('step-' + step).classList.remove('active');
+            document.getElementById('step-' + step).classList.add('completed');
+
+            // Mostrar siguiente paso
+            currentStep = step + 1;
+            document.getElementById('content-' + currentStep).classList.add('active');
+            document.getElementById('step-' + currentStep).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previousStep(step) {
+            // Ocultar paso actual
+            document.getElementById('content-' + step).classList.remove('active');
+            document.getElementById('step-' + step).classList.remove('active');
+
+            // Mostrar paso anterior
+            currentStep = step - 1;
+            document.getElementById('content-' + currentStep).classList.add('active');
+            document.getElementById('step-' + currentStep).classList.add('active');
+            document.getElementById('step-' + currentStep).classList.remove('completed');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateStep(step) {
+            const content = document.getElementById('content-' + step);
+            const inputs = content.querySelectorAll('input[required], select[required], textarea[required]');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+
+            // Validaciones especiales
+            if (step === 1) {
+                const password = content.querySelector('input[name="Password"]').value;
+                const confirmPassword = content.querySelector('input[name="ConfirmPassword"]').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Las contraseñas no coinciden');
+                    return false;
+                }
+            }
+
+            if (step === 3) {
+                // Verificar documentos obligatorios
+                const requiredDocs = ['ine-frente', 'ine-reverso', 'comprobante', 'foto-perfil'];
+                const missingDocs = requiredDocs.filter(doc => !uploadedFiles[doc]);
+                
+                if (missingDocs.length > 0) {
+                    alert('Por favor sube todos los documentos requeridos (*)');
+                    return false;
+                }
+            }
+
+            if (!valid) {
+                alert('Por favor completa todos los campos requeridos');
+            }
+
+            return valid;
+        }
+
+        function handleFileSelect(docType, input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // Validar tamaño (5MB máximo)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('El archivo no puede superar los 5MB');
+                input.value = '';
+                return;
+            }
+
+            // Guardar archivo
+            uploadedFiles[docType] = file;
+
+            // Actualizar UI
+            const docItem = document.getElementById('doc-' + docType);
+            docItem.classList.add('uploaded');
+            
+            const button = docItem.querySelector('button');
+            button.innerHTML = '<i class="bi bi-check-circle me-1"></i> Subido';
+            button.classList.remove('btn-outline-primary', 'btn-outline-secondary');
+            button.classList.add('btn-success');
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!document.getElementById('acceptTerms').checked) {
+                alert('Debes aceptar los términos y condiciones');
+                return;
+            }
+
+            const btn = document.getElementById('btn-submit');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Creando cuenta...';
+
+            // Crear FormData
+            const formData = new FormData(this);
+            formData.append('Role', 'tecnico');
+
+            // Agregar archivos
+            for (const [docType, file] of Object.entries(uploadedFiles)) {
+                formData.append('Document_' + docType, file);
+            }
+
+            // Enviar al servidor
+            fetch('@Url.Action("RegistrarTecnico", "Login")', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Mostrar mensaje de éxito
+                    alert('¡Cuenta creada exitosamente! Redirigiendo...');
+                    window.location.href = result.redirectUrl;
+                } else {
+                    alert('Error: ' + result.message);
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="bi bi-check-circle me-2"></i> Crear mi Cuenta';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al crear la cuenta. Por favor intenta nuevamente.');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-check-circle me-2"></i> Crear mi Cuenta';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -294,8 +294,18 @@
     .hover-lift {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    @@media (max-width: 768px) {
+        .category-pills {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 10px;
+        }
 
-    
+        .category-pills .btn {
+            flex-shrink: 0;
+        }
+    }
+
 </style>
 
 @section Scripts {

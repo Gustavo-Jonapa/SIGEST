@@ -1,16 +1,22 @@
-﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Linq;
 
 namespace SIGEST.Models
 {
-	public class LoginModel
-	{
-		[Required(ErrorMessage = "El usuario es requerido")]
-		public string Usuario { get; set; }
+    /// <summary>
+    /// Modelo para el formulario de login
+    /// </summary>
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "El usuario es requerido")]
+        [Display(Name = "Usuario")]
+        public string Username { get; set; }
 
-		[Required(ErrorMessage = "La contraseña es requerida")]
-		public string Contraseña { get; set; }
-	}
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string Password { get; set; }
+
+        [Display(Name = "Recordarme")]
+        public bool RememberMe { get; set; }
+    }
 }

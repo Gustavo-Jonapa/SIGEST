@@ -128,6 +128,15 @@
             animation: pulse 2s infinite;
         }
 
+        @@keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
         .user-avatar-wrapper {
             position: relative;
         }
@@ -216,7 +225,9 @@
         /* Utilities */
         .text-gradient {
             background: var(--gradient-primary);
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .shadow-soft {
@@ -243,12 +254,55 @@
             background: linear-gradient(135deg, #5a6fd8 0%, #6a4391 100%);
         }
 
+        /* Animations */
+        @@keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         .animate-slide-down {
             animation: slideInDown 0.4s ease-out;
         }
 
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Responsive */
+        @@media (max-width: 991px) {
+            .navbar-nav {
+                padding-top: 1rem;
+            }
+
+            .navbar-nav .nav-link.active::after {
+                display: none;
+            }
+
+            .user-menu {
+                padding-top: 1rem;
+                border-top: 1px solid #e9ecef;
+                margin-top: 1rem;
+                justify-content: flex-start;
+            }
+
+            .user-info {
+                text-align: left;
+            }
         }
     </style>
 </head>

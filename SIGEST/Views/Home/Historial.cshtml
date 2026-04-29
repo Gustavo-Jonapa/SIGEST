@@ -390,7 +390,19 @@
     .rating i {
         font-size: 0.875rem;
     }
+    @@media (max-width: 768px) {
+        .stat-card .card-body {
+            padding: 1rem !important;
+        }
 
+        .service-card .row {
+            flex-direction: column;
+        }
+
+        .service-card .col-auto {
+            margin-bottom: 1rem;
+        }
+    }
 </style>
 
 @section Scripts {
