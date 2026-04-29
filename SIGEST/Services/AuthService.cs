@@ -123,7 +123,7 @@ namespace SIGEST.Services
                             Nombre = model.Name,
                             Telefono = model.Phone,
                             CorreoElectronico = model.Email,
-                            Direccion = model.Address
+                            Direccion = model.Address ?? "Sin dirección"
                         };
                         context.Clientes.Add(cliente);
 
